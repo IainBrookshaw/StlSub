@@ -1,0 +1,130 @@
+.TH "kia::Triangle" 3 "Fri Jan 6 2017" "STL_SUBDIVISION_LIBRARY" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+kia::Triangle \- 
+.PP
+The 'Triangle' class defines exactly 1 triangle as used by an STL\&. STL files are described as vectors of 'Triangles'\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <triangle\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBTriangle\fP ()"
+.br
+.RI "\fIDefault Constructor\&. \fP"
+.ti -1c
+.RI "\fBTriangle\fP (\fBVector3d\fP _v1, \fBVector3d\fP _v2, \fBVector3d\fP _v3, \fBVector3d\fP _normals)"
+.br
+.RI "\fI1st Constructor\&. This requires all the triangle verticies and the normal vectors\&. \fP"
+.ti -1c
+.RI "\fBTriangle\fP (\fBVector3d\fP _v1, \fBVector3d\fP _v2, \fBVector3d\fP _v3)"
+.br
+.RI "\fI2nd Constructor\&. This requires just the triangle verticies \fP"
+.ti -1c
+.RI "\fB~Triangle\fP ()"
+.br
+.RI "\fIDefault Destructor\&. \fP"
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBVector3d\fP \fBv1\fP"
+.br
+.RI "\fIthe 1st vertex (a 3d point) \fP"
+.ti -1c
+.RI "\fBVector3d\fP \fBv2\fP"
+.br
+.RI "\fIthe 2nd vertex (a 3d point) \fP"
+.ti -1c
+.RI "\fBVector3d\fP \fBv3\fP"
+.br
+.RI "\fIthe 3rd vertex (a 3d point) \fP"
+.ti -1c
+.RI "\fBVector3d\fP \fBnormals\fP"
+.br
+.RI "\fIthe face normal unit vector (usually not used)\&. \fP"
+.in -1c
+.SH "Detailed Description"
+.PP 
+The 'Triangle' class defines exactly 1 triangle as used by an STL\&. STL files are described as vectors of 'Triangles'\&. 
+
+This is not a class the user should need to access directly, Thus everything is 'public'\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "kia::Triangle::Triangle ()"
+
+.PP
+Default Constructor\&. 
+.PP
+ 
+.SS "kia::Triangle::Triangle (\fBVector3d\fP_v1, \fBVector3d\fP_v2, \fBVector3d\fP_v3, \fBVector3d\fP_normals)"
+
+.PP
+1st Constructor\&. This requires all the triangle verticies and the normal vectors\&. 
+.PP
+ 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI_v1\fP -- vertex 1 
+.br
+\fI_v2\fP -- vertex 3 
+.br
+\fI_v3\fP -- vertex 3 
+.br
+\fI_normals\fP -- vertex normals 
+.RE
+.PP
+
+.SS "kia::Triangle::Triangle (\fBVector3d\fP_v1, \fBVector3d\fP_v2, \fBVector3d\fP_v3)"
+
+.PP
+2nd Constructor\&. This requires just the triangle verticies 
+.PP
+ 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI_v1\fP -- vertex 1 
+.br
+\fI_v2\fP -- vertex 3 
+.br
+\fI_v3\fP -- vertex 3 
+.RE
+.PP
+
+.SS "kia::Triangle::~Triangle ()"
+
+.PP
+Default Destructor\&. 
+.PP
+ 
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBVector3d\fP kia::Triangle::normals"
+
+.PP
+the face normal unit vector (usually not used)\&. 
+.SS "\fBVector3d\fP kia::Triangle::v1"
+
+.PP
+the 1st vertex (a 3d point) 
+.SS "\fBVector3d\fP kia::Triangle::v2"
+
+.PP
+the 2nd vertex (a 3d point) 
+.SS "\fBVector3d\fP kia::Triangle::v3"
+
+.PP
+the 3rd vertex (a 3d point) 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for STL_SUBDIVISION_LIBRARY from the source code\&.

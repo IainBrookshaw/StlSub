@@ -1,0 +1,477 @@
+.TH "kia::Mesh" 3 "Fri Jan 6 2017" "STL_SUBDIVISION_LIBRARY" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+kia::Mesh \- 
+.PP
+The 'Mesh' class is the master class for the STL meshes\&. It includes the original user input mesh, methods to load this and subdivide it into a finer stl mesh\&. The subdivision does not alter the overall geometry, this is not a smoothing utility\&. It is also important to note that the exact size of the final triangles is undefined, only the maximum triangle size is specified\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <mesh\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBMesh\fP ()"
+.br
+.RI "\fIDefault Constructor\&. \fP"
+.ti -1c
+.RI "\fB~Mesh\fP ()"
+.br
+.RI "\fIDefault Destructor\&. \fP"
+.ti -1c
+.RI "void \fBsetInputFile\fP (std::string _input_fname)"
+.br
+.RI "\fIfile name get and set\&. \fP"
+.ti -1c
+.RI "std::string \fBgetInputFile\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetOutputFile\fP (std::string _output_fname)"
+.br
+.ti -1c
+.RI "std::string \fBgetOutputFile\fP ()"
+.br
+.ti -1c
+.RI "std::vector< \fBTriangle\fP > * \fBgetCoarseStlPtr\fP ()"
+.br
+.RI "\fIget the pointers to the stl data \fP"
+.ti -1c
+.RI "void \fBsetCoarseStl\fP (std::vector< \fBTriangle\fP > _coarse_stl)"
+.br
+.ti -1c
+.RI "std::vector< \fBTriangle\fP > * \fBgetFineStlPtr\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetFineStl\fP (std::vector< \fBTriangle\fP > _fine_stl_ptr)"
+.br
+.ti -1c
+.RI "void \fBsetMaxTriangleArea\fP (double _max_t_a)"
+.br
+.RI "\fIGet and set the maximum triangle area parameter for the fine stl\&. \fP"
+.ti -1c
+.RI "double \fBgetMaxTriangleArea\fP ()"
+.br
+.ti -1c
+.RI "void \fBmakeFine\fP ()"
+.br
+.RI "\fIThis is the master method for making the mesh finer\&. \fP"
+.ti -1c
+.RI "double \fBgetFaceArea\fP (\fBTriangle\fP *_face_ptr)"
+.br
+.RI "\fIThis method computes the area of the input face\&. Area computation is via vector cross product\&. \fP"
+.ti -1c
+.RI "bool \fBcheckFaceArea\fP (\fBTriangle\fP *_face_ptr)"
+.br
+.RI "\fIChecks if the face area is acceptable with maximum area\&. \fP"
+.ti -1c
+.RI "int \fBgetSubFacePoints\fP (\fBTriangle\fP *_face_ptr, std::vector< \fBTriangle\fP > *_sub_faces)"
+.br
+.RI "\fIThis returns the four subdivided faces of the first triangle\&. \fP"
+.ti -1c
+.RI "int \fBsubdivide\fP (\fBTriangle\fP *_in_face_ptr, std::vector< \fBTriangle\fP > *_out_faces_ptr)"
+.br
+.RI "\fIThis is a recursive method that does the actual sub-dividing of the face until the mimimum size is met for each face\&. \fP"
+.ti -1c
+.RI "int \fBbyte2int\fP (unsigned char *_in_arr)"
+.br
+.RI "\fIconverts a byte-char array to int\&. It is assumed that the length of the char array makes sense for int\&. We further assume that this is a little endian environment\&. Your STL file must conform to this assumption -- ie: it must be created on a little endian machine\&. \fP"
+.ti -1c
+.RI "float \fBbyte2float\fP (unsigned char *_in_arr)"
+.br
+.RI "\fIconverts a byte-char array to float\&. It is assumed that the length of the char array makes sense for float\&. We further assume that this is a little endian environment\&. Your STL file must conform to this assumption -- ie: it must be created on a little endian machine\&. \fP"
+.ti -1c
+.RI "int \fBreadNbytes\fP (unsigned char *_arr, std::ifstream *_st_ptr, int *_idx_ptr, int _N)"
+.br
+.RI "\fIreads in N bytes from an ifstream \fP"
+.ti -1c
+.RI "const char * \fBtype2byte\fP (float *_in)"
+.br
+.RI "\fIconverts a signed integer to a byte array for writing to file\&. as usual, we assume little endian\&. \fP"
+.ti -1c
+.RI "const char * \fBtype2byte\fP (int *_in)"
+.br
+.ti -1c
+.RI "\fBVector3d\fP \fBreadVector\fP (int *_idx, std::ifstream *_in_str)"
+.br
+.RI "\fIThis method reads in a vector -- a set of three points\&. \fP"
+.ti -1c
+.RI "int \fBloadStl\fP (std::string _in_stl)"
+.br
+.RI "\fIload STL parser for binary STL files \fP"
+.ti -1c
+.RI "int \fBsaveStl\fP ()"
+.br
+.ti -1c
+.RI "int \fBwriteVector\fP (std::ofstream *_file_ptr, \fBVector3d\fP *_v)"
+.br
+.RI "\fIwrite a vector3d class to a binary file\&. \fP"
+.ti -1c
+.RI "int \fBwriteFineStl\fP (std::string _fname)"
+.br
+.RI "\fIWrite fine stl to binary file\&. \fP"
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "std::string \fBinput_stl_fname\fP"
+.br
+.RI "\fIThe input STL file name\&. \fP"
+.ti -1c
+.RI "std::string \fBoutput_stl_fname\fP"
+.br
+.RI "\fIThe output STL file name\&. \fP"
+.ti -1c
+.RI "unsigned char * \fBheader_char_ptr\fP"
+.br
+.RI "\fIpointer to character headers\&. \fP"
+.ti -1c
+.RI "std::vector< \fBTriangle\fP > \fBcoarse_stl\fP"
+.br
+.RI "\fIThe coarse input stl triangles from the input_stl_fname file\&. \fP"
+.ti -1c
+.RI "std::vector< \fBTriangle\fP > \fBfine_stl\fP"
+.br
+.RI "\fIThe post-processed finer stl triangles\&. \fP"
+.ti -1c
+.RI "double \fBmax_triangle_area\fP"
+.br
+.RI "\fIThe maximum triangle area for the fine stl\&. \fP"
+.ti -1c
+.RI "int \fBrecursion\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+The 'Mesh' class is the master class for the STL meshes\&. It includes the original user input mesh, methods to load this and subdivide it into a finer stl mesh\&. The subdivision does not alter the overall geometry, this is not a smoothing utility\&. It is also important to note that the exact size of the final triangles is undefined, only the maximum triangle size is specified\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "kia::Mesh::Mesh ()"
+
+.PP
+Default Constructor\&. 
+.PP
+ 
+.SS "kia::Mesh::~Mesh ()"
+
+.PP
+Default Destructor\&. 
+.PP
+ 
+.SH "Member Function Documentation"
+.PP 
+.SS "float kia::Mesh::byte2float (unsigned char *_in_arr)"
+
+.PP
+converts a byte-char array to float\&. It is assumed that the length of the char array makes sense for float\&. We further assume that this is a little endian environment\&. Your STL file must conform to this assumption -- ie: it must be created on a little endian machine\&. 
+.PP
+ 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI_in_arr\fP --- pointer to first entry of input array 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the float conversion\&. -1 is error, but also legitimate return 
+.RE
+.PP
+
+.SS "int kia::Mesh::byte2int (unsigned char *_in_arr)"
+
+.PP
+converts a byte-char array to int\&. It is assumed that the length of the char array makes sense for int\&. We further assume that this is a little endian environment\&. Your STL file must conform to this assumption -- ie: it must be created on a little endian machine\&. 
+.PP
+ 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI_in_arr\fP --- pointer to first entry of input array 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the float conversion\&. -1 is error, but also legitimate return\&. 
+.RE
+.PP
+
+.SS "bool kia::Mesh::checkFaceArea (\fBTriangle\fP *_face_ptr)"
+
+.PP
+Checks if the face area is acceptable with maximum area\&. 
+.PP
+ 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI_face_ptr\fP --- pointer to this face triangle 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+is this face acceptable? yes/no 
+.RE
+.PP
+
+.SS "std::vector< \fBTriangle\fP > * kia::Mesh::getCoarseStlPtr ()"
+
+.PP
+get the pointers to the stl data 
+.PP
+ 
+.SS "double kia::Mesh::getFaceArea (\fBTriangle\fP *_face_ptr)"
+
+.PP
+This method computes the area of the input face\&. Area computation is via vector cross product\&. 
+.PP
+ 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI_face_ptr\fP --- pointer to the input face 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the area of the input face in <units>^2, -1 if error 
+.RE
+.PP
+
+.SS "std::vector< \fBTriangle\fP > * kia::Mesh::getFineStlPtr ()"
+
+.SS "std::string kia::Mesh::getInputFile ()"
+
+.SS "double kia::Mesh::getMaxTriangleArea ()"
+
+.SS "std::string kia::Mesh::getOutputFile ()"
+
+.SS "int kia::Mesh::getSubFacePoints (\fBTriangle\fP *_face_ptr, std::vector< \fBTriangle\fP > *_sub_faces)"
+
+.PP
+This returns the four subdivided faces of the first triangle\&. 
+.PP
+ 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI_face_ptr\fP --- the triangle to be subdivided\&. 
+.br
+\fI_sub_faces\fP -- pointer to a vector of 4 sub-faces 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+integer; 0 if success, 1 or higher if failed\&. 
+.RE
+.PP
+
+.SS "int kia::Mesh::loadStl (std::string_in_stl)"
+
+.PP
+load STL parser for binary STL files 
+.PP
+ 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI_in_stl\fP --- input file name or complete path\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+0 for successful load and parsing, 1 for failure\&. 
+.RE
+.PP
+
+.SS "void kia::Mesh::makeFine ()"
+
+.PP
+This is the master method for making the mesh finer\&. 
+.PP
+ 
+.SS "int kia::Mesh::readNbytes (unsigned char *_arr, std::ifstream *_st_ptr, int *_idx_ptr, int_N)"
+
+.PP
+reads in N bytes from an ifstream 
+.PP
+ 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI_idx_ptr\fP -- pointer to starting index in file\&. This is incremented by the read action 
+.br
+\fI_N\fP -- number of bytes to read in 
+.br
+\fI_st_ptr\fP -- pointer to the ifstream, assumed to be open for read 
+.br
+\fI_arr\fP -- array of unsigned chars 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+0 if success, 1 if failed 
+.RE
+.PP
+
+.SS "\fBVector3d\fP kia::Mesh::readVector (int *_idx, std::ifstream *_in_str)"
+
+.PP
+This method reads in a vector -- a set of three points\&. 
+.PP
+ 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI_idx\fP -- pointer to stream index 
+.br
+\fI_in_str\fP -- pointer to the stream 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the vector\&. all entries are -1 if failed, although this is also a valid return\&. We have to return something\&. 
+.RE
+.PP
+
+.SS "int kia::Mesh::saveStl ()"
+
+.SS "void kia::Mesh::setCoarseStl (std::vector< \fBTriangle\fP >_coarse_stl)"
+
+.SS "void kia::Mesh::setFineStl (std::vector< \fBTriangle\fP >_fine_stl_ptr)"
+
+.SS "void kia::Mesh::setInputFile (std::string_input_fname)"
+
+.PP
+file name get and set\&. 
+.PP
+ 
+.SS "void kia::Mesh::setMaxTriangleArea (double_max_t_a)"
+
+.PP
+Get and set the maximum triangle area parameter for the fine stl\&. 
+.PP
+ 
+.SS "void kia::Mesh::setOutputFile (std::string_output_fname)"
+
+.SS "int kia::Mesh::subdivide (\fBTriangle\fP *_in_face_ptr, std::vector< \fBTriangle\fP > *_out_faces_ptr)"
+
+.PP
+This is a recursive method that does the actual sub-dividing of the face until the mimimum size is met for each face\&. 
+.PP
+ 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI_in_face_ptr\fP -- pointer to 'this' face we are subdividing 
+.br
+\fI_out_faces_ptr\fP -- pointer to the vector of triangles that define the new faces\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+0 on success, 1 on fail\&. 
+.RE
+.PP
+
+.PP
+\fBTodo\fP
+.RS 4
+recursion safety: un-Hardwire this\&. Some faces might be very big 
+.RE
+.PP
+
+.SS "const char * kia::Mesh::type2byte (float *_in_ptr)"
+
+.PP
+converts a signed integer to a byte array for writing to file\&. as usual, we assume little endian\&. 
+.PP
+ 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI_in_ptr\fP --- pointer to number for transform\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+pointer to the byte array\&. 
+.RE
+.PP
+
+.SS "const char * kia::Mesh::type2byte (int *_in)"
+
+.SS "int kia::Mesh::writeFineStl (std::string_fname)"
+
+.PP
+Write fine stl to binary file\&. 
+.PP
+ 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI_fname\fP -- output file-name\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+0 on success, 1 on failure\&. 
+.RE
+.PP
+
+.SS "int kia::Mesh::writeVector (std::ofstream *_file_ptr, \fBVector3d\fP *_v_ptr)"
+
+.PP
+write a vector3d class to a binary file\&. 
+.PP
+ 
+.PP
+\fBParameters:\fP
+.RS 4
+\fI_file_ptr\fP --- pointer to the ofstream 
+.br
+\fI_v_ptr\fP --- pointer to the vector3d 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+0 on success, 1 on error\&. 
+.RE
+.PP
+
+.SH "Member Data Documentation"
+.PP 
+.SS "std::vector<\fBTriangle\fP> kia::Mesh::coarse_stl\fC [private]\fP"
+
+.PP
+The coarse input stl triangles from the input_stl_fname file\&. 
+.SS "std::vector<\fBTriangle\fP> kia::Mesh::fine_stl\fC [private]\fP"
+
+.PP
+The post-processed finer stl triangles\&. 
+.SS "unsigned char* kia::Mesh::header_char_ptr\fC [private]\fP"
+
+.PP
+pointer to character headers\&. 
+.SS "std::string kia::Mesh::input_stl_fname\fC [private]\fP"
+
+.PP
+The input STL file name\&. 
+.SS "double kia::Mesh::max_triangle_area\fC [private]\fP"
+
+.PP
+The maximum triangle area for the fine stl\&. 
+.SS "std::string kia::Mesh::output_stl_fname\fC [private]\fP"
+
+.PP
+The output STL file name\&. 
+.SS "int kia::Mesh::recursion\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for STL_SUBDIVISION_LIBRARY from the source code\&.
