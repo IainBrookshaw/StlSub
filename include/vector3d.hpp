@@ -1,11 +1,8 @@
 /**
- * KUKA INNOVATION AWARD
- * Perception -- STL Subdivision
+ * StlSub
  *
- * @file    vector3d.hpp
  * @author  Iain Brookshaw
  * @date    02 December 2016
- * @version 1.0
  *
  * @brief Header for the "Vector3d" class.
  *
@@ -14,7 +11,7 @@
 #define __VECTOR3D_HPP__
 #include <math.h>
 
-namespace kia {
+namespace StlSub {
   
   // ==========================================================================
   // |                          3D VECTOR CLASS                               |
@@ -55,6 +52,6 @@ namespace kia {
   // but it is convenient to declare them here.
   Vector3d crossProduct( Vector3d _v1, Vector3d _v2 );
   double vector3dAbsolute( Vector3d _v );
-}// end of namespace "kia"
+}// end of namespace "StlSub"
 
 #endif

@@ -12,7 +12,7 @@
  ******************************************************************************/
 #include "all_tests.hpp"
 
-using namespace kia;
+using namespace StlSub;
 
 // =============================================================================
 /**
@@ -27,7 +27,7 @@ public:
   double f_err = 0.01;
 
   // create pointer to tested mesh
-  kia::Mesh* test_mesh;
+  StlSub::Mesh* test_mesh;
   
   // generate test triangles for various methods...
   std::vector<Triangle> test_triangles;
@@ -39,7 +39,7 @@ public:
   virtual void SetUp(){
 
     // create test mesh.
-    this->test_mesh = new kia::Mesh();
+    this->test_mesh = new StlSub::Mesh();
     if( !this->test_mesh ){
       std::cout << "unable to get test-mesh!\n";
       return;

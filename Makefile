@@ -1,7 +1,7 @@
 #
 # Makefile for STL Mesh Subdivision
 #
-# This code is intended for compilation bythe GCC ONLY. GCC unique pre-proccessor
+# This code is intended for compilation by the GCC ONLY. GCC unique pre-proccessor
 # flags exist!
 #
 # NOTE: To run this the test program, you need to export the current 
@@ -9,23 +9,14 @@
 #       automatically by the make process.
 # 
 # Author:    Iain Brookshaw
-# Date:      05 December 2016
-# Version    1.0
-# Copyright: GPL
+# Date:      2018.06.17
+# Copyright: LGPL v3
 #
 ################################################################################
-VERSION = 1.0
-
 
 # ------------------------------------------------------------------------------
 # Directories and Files
 #
-TARGET_BASE     = libstlsubdiv.so
-TARGET_VERSION  = 1
-TARGET_REVISION = 0
-TARGET_NO       = 0
-TARGET      = $(TARGET_BASE).$(TARGET_VERSION).$(TARGET_REVISION).$(TARGET_NO)
-
 HEADERS    = include
 BUILDDIR   = build
 SOURCEDIR  = src
@@ -33,15 +24,21 @@ TESTDIR    = unit_tests
 EXESOURCE = $(SOURCEDIR)/refinestl.cpp
 EXETARGET = refinestl
 
+TARGET_BASE     = $(BUILDDIR)/libstlsubdiv.so
+TARGET_VERSION  = 0
+TARGET_REVISION = 1
+TARGET_NO       = 1
+TARGET      = $(TARGET_BASE).$(TARGET_VERSION).$(TARGET_REVISION).$(TARGET_NO)
+
 # main program sources and objects
 SOURCES     = $(wildcard $(SOURCEDIR)/*.cpp)
-OBJECTS     = $(patsubst $(SOURCEDIR)/%.cpp,$(BUILDDIR)/%.o, $(SOURCES))
+OBJECTS     = $(patsubst $(SOURCEDIR)/%.cpp, $(BUILDDIR)/%.o, $(SOURCES))
 EXEOBJECTS = $(BUILDDIR)/stlsubdiv.o
 
 # tests sources, objects and targets
 TEST_TARGET = ./$(TESTDIR)/all_tests
 TEST_SRC    = $(wildcard $(TESTDIR)/*.cpp)
-TEST_OBJ    = $(patsubst $(TESTDIR)/%.cpp,$(BUILDDIR)/%.o, $(TEST_SRC) )
+TEST_OBJ    = $(patsubst $(TESTDIR)/%.cpp, $(BUILDDIR)/%.o, $(TEST_SRC) )
 
 .PHONY: 
 	install uninstall clean exe $(EXETARGET) all tests
@@ -62,10 +59,10 @@ TEST_CPPFLAGS  := -I/usr/include/gtest -g -Wall -std=c++11 -I$(HEADERS)
 # ------------------------------------------------------------------------------
 # Libraries and Linking
 #
-LIBS          = -lm
-TEST_LIBS     = $(LIBS) -lgtest -lgtest_main -lstlsubdiv -pthread
+LIBS          = -lm 
+TEST_LIBS     = $(LIBS) -lgtest -lgtest_main -pthread -lstlsubdiv
 #
-LDFLAGS      := -shared -L/usr/local/lib -L/usr/lib 
+LDFLAGS      := -L/usr/local/lib -L/usr/lib -L./$(BUILDDIR) #-shared
 TEST_LDFLAGS := -L/usr/local/lib -L/usr/lib 
 # ------------------------------------------------------------------------------
 
@@ -108,13 +105,17 @@ $(BUILDDIR)/%.o: $(TESTDIR)/%.cpp
 exe: $(EXETARGET)
 #
 $(EXETARGET): $(TARGET) $(EXEOBJECTS) 
-	$(CXX) $(CPPFLAGS)  $(LDFAGS) $(EXEOBJECTS) -o $(EXETARGET) $(LIBS) -L./ -lstlsubdiv
+	$(CXX) $(CPPFLAGS)  $(LDFAGS) $(EXEOBJECTS) -o $(EXETARGET) $(LIBS) -lstlsubdiv
 #
 $(EXEOBJECTS): $(EXESOURCE)
 	$(CXX) $(CPPFLAGS) $(LDFLAGS)  -c $< -o $@
 #
 #
 all: $(TARGET) install $(EXETARGET) 
+#
+#
+docs: 
+	@doxygen ./myDoxyfile
 #
 #
 install: $(TARGET)

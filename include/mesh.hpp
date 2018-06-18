@@ -1,11 +1,8 @@
 /**
- * KUKA INNOVATION AWARD
- * Perception -- STL Subdivision
+ * StlSub
  *
- * @file    mesh.hpp
  * @author  Iain Brookshaw
  * @date    02 December 2016
- * @version 1.0
  *
  * @brief Header for the "Mesh" class.
  *
@@ -28,7 +25,7 @@
 
 
 
-namespace kia {
+namespace StlSub {
 
   // ==========================================================================
   // |                            STL MESH CLASS                              |
@@ -121,5 +118,5 @@ namespace kia {
     
   }; // end of class "Mesh"
 
-} // end of kia namespace
+} // end of StlSub namespace
 #endif

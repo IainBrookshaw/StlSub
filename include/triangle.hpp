@@ -1,11 +1,9 @@
 /**
- * KUKA INNOVATION AWARD
- * Perception -- STL Subdivision
+ * StlSub
  *
  * @file    triangle.hpp
  * @author  Iain Brookshaw
  * @date    02 December 2016
- * @version 1.0
  *
  * @brief Header for the "Triangle" class. This is the expression of an
  *        stl face.
@@ -26,7 +24,7 @@
 #include<vector3d.hpp>
 
 
-namespace kia {
+namespace StlSub {
 
   // ==========================================================================
   // |                          TRIANGLE CLASS                                |
@@ -80,5 +78,5 @@ namespace kia {
   std::ostream& operator<< (std::ostream &_out, Triangle const& _data);
 
        
-}// end of namespace "kia"
+}// end of namespace "StlSub"
 #endif

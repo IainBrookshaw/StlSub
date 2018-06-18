@@ -36,10 +36,12 @@ This library was built specifically for Ubuntu Linux machines. Windows
 is NOT supported.
 
 ## Install
+### Linux
 ```bash
    make install
    #note: You need sudo privileges to do this, installs to /usr/local/lib
 ```
+### Mac
 
 ## Linking
    TODO

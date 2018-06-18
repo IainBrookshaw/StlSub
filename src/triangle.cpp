@@ -1,18 +1,14 @@
 /**
- * KUKA INNOVATION AWARD
- * Perception -- STL Subdivision
- *
- * @file    triangle.cpp
+ * StlSub
  * @author  Iain Brookshaw
  * @date    02 December 2016
- * @version 1.0
  *
  * @brief Method Source for the "Triangle" Class
  *
  ******************************************************************************/
 #include <triangle.hpp>
 
-namespace kia { 
+namespace StlSub { 
 
   // ==========================================================================
   // |                     CONSTRUCTORS & DESTRUCTORS                         |
@@ -93,4 +89,4 @@ namespace kia {
 
 
 
-} // end of namespace of "kia"
+} // end of namespace of "StlSub"

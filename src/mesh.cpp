@@ -1,18 +1,14 @@
 /**
- * KUKA INNOVATION AWARD
- * Perception -- STL Subdivision
- *
- * @file    mesh.cpp
- * @author  Iain Brookshaw
- * @date    02 December 2016
- * @version 1.0
+ * StlSub
+ * @author Iain Brookshaw
+ * @date   02 December 2016
  *
  * @brief Method Source for the "Mesh" Class
  *
  ******************************************************************************/
 #include <mesh.hpp>
 
-namespace kia { 
+namespace StlSub { 
   
   // ==========================================================================
   // |                     CONSTRUCTORS & DESTRUCTORS                         |
@@ -170,56 +166,7 @@ namespace kia {
       std::cout << std::string(__FUNCTION__) << "(): sub_face_length is invalid! Please reserve 4 spaces!\n";
       return 1;
     }
-    /*
-    // the old points
-    Vector3d Q1 = _face_ptr->v1;
-    Vector3d Q2 = _face_ptr->v2;
-    Vector3d Q3 = _face_ptr->v3;
-
-    // the new points
-    Vector3d P1;
-    Vector3d P2;
-    Vector3d P3;
-
-    // compute the new points
-    P1.x = Q1.x + (Q2.x - Q1.x);
-    P1.y = Q1.y + (Q2.y - Q1.y);
-    P1.z = Q1.z + (Q2.z - Q1.z);
-
-    P2.x = Q2.x + (Q3.x - Q2.x);
-    P2.y = Q2.y + (Q3.y - Q2.y);
-    P2.z = Q2.z + (Q3.z - Q2.z);
-
-    P1.x = Q1.x + (Q3.x - Q1.x);
-    P1.y = Q1.y + (Q3.y - Q1.y);
-    P1.z = Q1.z + (Q3.z - Q1.z);
-
-    // assign the verticies for triangle 1
-    (*_sub_faces)[0].v1 = Q1;
-    (*_sub_faces)[0].v2 = P1;
-    (*_sub_faces)[0].v3 = P3;
-
-    // assign the verticies for triangle 2
-    (*_sub_faces)[1].v1 = P1;
-    (*_sub_faces)[1].v2 = Q2;
-    (*_sub_faces)[1].v3 = P2;
-
-    // assign the verticies for triangle 3
-    (*_sub_faces)[2].v1 = P3;
-    (*_sub_faces)[2].v2 = P2;
-    (*_sub_faces)[2].v3 = Q3;
-
-    // assign the verticies for triangle 4
-    (*_sub_faces)[3].v1 = P1;
-    (*_sub_faces)[3].v2 = P2;
-    (*_sub_faces)[3].v3 = P3;
-
-    */
-
-
-
-
-
+  
     Vector3d p0;
     p0.x = _face_ptr->v1.x - (_face_ptr->v1.x - _face_ptr->v2.x)/2.0;
     p0.y = _face_ptr->v1.y - (_face_ptr->v1.y - _face_ptr->v2.y)/2.0;
@@ -583,10 +530,7 @@ namespace kia {
     float x = (float)_v_ptr->x;
     float y = (float)_v_ptr->y;
     float z = (float)_v_ptr->z;
-    //    const char* char_x_ptr = this->type2byte( &x );
-    //    float float_x = this->byte2float( (unsigned char*)char_x_ptr );
-    //    std::cout << std::string(__FUNCTION__) << "(): in x = " << _v_ptr->x << ", out x = " << float_x << "\n";
-
+   
     _file_ptr->write( this->type2byte( &x ), sizeof(float) );
     _file_ptr->write( this->type2byte( &y ), sizeof(float) );
     _file_ptr->write( this->type2byte( &z ), sizeof(float) );
@@ -653,4 +597,4 @@ namespace kia {
   }
   // -------------------------------------------------------------------------  
     
-} // end of namespace of "kia"
+} // end of namespace of "StlSub"

@@ -21,14 +21,13 @@ void usage(){
   std::cout << "\n"
 	    << "Name:    refinestl\n"
 	    << "Author:  Iain J. Brookshaw\n"
-	    << "Version: 1.0\n"
-	    << "Date:    4th January 2017\n"
+	    << "Date:    18th June 2018\n"
 	    << "\n"
 	    << "Description:\n"
-	    << "\t This is a simple program which implements the STL-SUBDIVISION-LIBRARY\n"
+	    << "\t This is a simple program which implements a STL subdivision libarary\n"
 	    << "\t allowing the user to reduce the granularity of a 3D object STL file.\n"
 	    << "\t Users may specify the source STL, the destination STL and the maximum\n"
-	    << "\t triangle area. This STL-SUBDIVISION-LIBRARY gaurantees that all \n"
+	    << "\t triangle area. This STL subdivision gaurantees that all \n"
 	    << "\t triangles in dst will be smaller than max-area. There are no gaurantees\n"
 	    << "\t regarding the dimensions of the triangle other than its maximum area.\n" 
 	    << "\n"
@@ -42,7 +41,7 @@ void usage(){
 	    << "\t 0 on success, 1 on failure\n"
 	    << "\n"
 	    << "Copyright\n"
-	    << "\t Copyright (C) 2017 Iain Brookshaw\n"
+	    << "\t Copyright (C) 2018 Iain Brookshaw\n"
 	    << "\n"
 	    << "\t This program is free software under the LGPL v3.0 and is distributed in the hope\n"
 	    << "\t that it will be useful, but WITHOUT ANY WARRANTY, without even the implied warranty\n"
@@ -97,7 +96,7 @@ int main( int argc, char** argv ){
   }
      
   if( verb ) OUT << "creating mesh...\n";
-  kia::Mesh* in_stl_mesh = new kia::Mesh();
+  StlSub::Mesh* in_stl_mesh = new StlSub::Mesh();
   if( !in_stl_mesh ){
     OUT << "Unable to create mesh!\n";
     return 1;
