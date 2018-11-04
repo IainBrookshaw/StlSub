@@ -33,7 +33,19 @@ There are no dependencies other than the c++11 standard libraries
 
 ## Unit-Testing
    The Google G-Test unit-testing framework was used to unit-test this 
-   library. TODO: Install instructions
+   library. installing this is something of a pain:
+   ```
+   sudo apt-get install libgtest-dev
+   cd /usr/src/gtest
+   sudo mkdir build
+   cd build
+   sudo cmake ..
+   sudo make -j8 # or whatever parallelisation your CPU supports
+   sudo cp libgtest* /usr/lib # all the .a static libraries
+   cd ..
+   sudo rm -r build
+   ```
+   Once you have done this and returned to the StlSub dir, you may then run `make tests` to see all the unit tests.
 
 ## Documentation
    run:

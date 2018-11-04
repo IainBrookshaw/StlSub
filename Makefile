@@ -31,7 +31,7 @@ BUILDDIR   = build
 SOURCEDIR  = src
 TESTDIR    = unit_tests
 EXESOURCE = $(SOURCEDIR)/refinestl.cpp
-EXETARGET = refinestl
+EXETARGET = stlsub
 
 # main program sources and objects
 SOURCES     = $(wildcard $(SOURCEDIR)/*.cpp)
