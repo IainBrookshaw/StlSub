@@ -12,7 +12,7 @@
  ******************************************************************************/
 #include <triangle.hpp>
 
-namespace kia { 
+namespace stlsub { 
 
   // ==========================================================================
   // |                     CONSTRUCTORS & DESTRUCTORS                         |
@@ -93,4 +93,4 @@ namespace kia {
 
 
 
-} // end of namespace of "kia"
+} // end of namespace of "stlsub"

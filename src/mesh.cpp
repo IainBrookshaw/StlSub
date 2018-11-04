@@ -12,7 +12,7 @@
  ******************************************************************************/
 #include <mesh.hpp>
 
-namespace kia { 
+namespace stlsub { 
   
   // ==========================================================================
   // |                     CONSTRUCTORS & DESTRUCTORS                         |
@@ -93,8 +93,8 @@ namespace kia {
 
     for( it=this->coarse_stl.begin(); it<this->coarse_stl.end(); it++ ){
       if( this->subdivide( &(*it), &this->fine_stl )){
-	std::cout << std::string(__FUNCTION__) << "(): subdivision failed!\n";
-	return;
+  std::cout << std::string(__FUNCTION__) << "(): subdivision failed!\n";
+  return;
       }
     }
   }    
@@ -114,12 +114,12 @@ namespace kia {
     } 
 
     Vector3d v1( _face_ptr->v2.x - _face_ptr->v1.x,
-		 _face_ptr->v2.y - _face_ptr->v1.y,
-		 _face_ptr->v2.z - _face_ptr->v1.z );
+     _face_ptr->v2.y - _face_ptr->v1.y,
+     _face_ptr->v2.z - _face_ptr->v1.z );
 
     Vector3d v2( _face_ptr->v3.x - _face_ptr->v1.x,
-		 _face_ptr->v3.y - _face_ptr->v1.y,
-		 _face_ptr->v3.z - _face_ptr->v1.z );
+     _face_ptr->v3.y - _face_ptr->v1.y,
+     _face_ptr->v3.z - _face_ptr->v1.z );
 
     Vector3d cross_vect = crossProduct( v1, v2 );
     double a = 0.5*(vector3dAbsolute( cross_vect ));
@@ -170,55 +170,6 @@ namespace kia {
       std::cout << std::string(__FUNCTION__) << "(): sub_face_length is invalid! Please reserve 4 spaces!\n";
       return 1;
     }
-    /*
-    // the old points
-    Vector3d Q1 = _face_ptr->v1;
-    Vector3d Q2 = _face_ptr->v2;
-    Vector3d Q3 = _face_ptr->v3;
-
-    // the new points
-    Vector3d P1;
-    Vector3d P2;
-    Vector3d P3;
-
-    // compute the new points
-    P1.x = Q1.x + (Q2.x - Q1.x);
-    P1.y = Q1.y + (Q2.y - Q1.y);
-    P1.z = Q1.z + (Q2.z - Q1.z);
-
-    P2.x = Q2.x + (Q3.x - Q2.x);
-    P2.y = Q2.y + (Q3.y - Q2.y);
-    P2.z = Q2.z + (Q3.z - Q2.z);
-
-    P1.x = Q1.x + (Q3.x - Q1.x);
-    P1.y = Q1.y + (Q3.y - Q1.y);
-    P1.z = Q1.z + (Q3.z - Q1.z);
-
-    // assign the verticies for triangle 1
-    (*_sub_faces)[0].v1 = Q1;
-    (*_sub_faces)[0].v2 = P1;
-    (*_sub_faces)[0].v3 = P3;
-
-    // assign the verticies for triangle 2
-    (*_sub_faces)[1].v1 = P1;
-    (*_sub_faces)[1].v2 = Q2;
-    (*_sub_faces)[1].v3 = P2;
-
-    // assign the verticies for triangle 3
-    (*_sub_faces)[2].v1 = P3;
-    (*_sub_faces)[2].v2 = P2;
-    (*_sub_faces)[2].v3 = Q3;
-
-    // assign the verticies for triangle 4
-    (*_sub_faces)[3].v1 = P1;
-    (*_sub_faces)[3].v2 = P2;
-    (*_sub_faces)[3].v3 = P3;
-
-    */
-
-
-
-
 
     Vector3d p0;
     p0.x = _face_ptr->v1.x - (_face_ptr->v1.x - _face_ptr->v2.x)/2.0;
@@ -241,40 +192,40 @@ namespace kia {
     int i=0;
     for( it=_sub_faces->begin(); it<_sub_faces->end(); it++, i++ ){
 
-      switch(i){
-      case 0:
-	// sub-face 1
-	it->v1 = _face_ptr->v1;
-	it->v2 = p0;
-	it->v3 = p2;
-      	break;
+        switch(i){
+          case 0:
+            // sub-face 1
+            it->v1 = _face_ptr->v1;
+            it->v2 = p0;
+            it->v3 = p2;
+            break;
 
-      case 1:
-	// sub-face 2
-	it->v1 = p0;
-	it->v2 = _face_ptr->v2;
-	it->v3 = p1;
-	break;
+          case 1:
+            // sub-face 2
+            it->v1 = p0;
+            it->v2 = _face_ptr->v2;
+            it->v3 = p1;
+            break;
 
-      case 2:
-	// sub-face 3
-	it->v1 = p2;
-	it->v2 = p1;//p0;
-	it->v3 = _face_ptr->v3;//p1;
-	break;
+          case 2:
+            // sub-face 3
+            it->v1 = p2;
+            it->v2 = p1;//p0;
+            it->v3 = _face_ptr->v3;//p1;
+            break;
 
-      case 3:
-	// sub-face 4
-	it->v1 = p2;
-	it->v2 = p0;
-	it->v3 = p1;
-	break;
-	
-      default:
-	std::cout << std::string(__FUNCTION__) << ": index error!\n";
-	return 1;
+          case 3:
+            // sub-face 4
+            it->v1 = p2;
+            it->v2 = p0;
+            it->v3 = p1;
+            break;
+      
+          default:
+            std::cout << std::string(__FUNCTION__) << ": index error!\n";
+            return 1;
+        }
       }
-    }
     
     // end of method
     return 0;
@@ -295,13 +246,11 @@ namespace kia {
 
     // sanity checks
     if( !_in_face_ptr ){
-       std::cout << std::string(__FUNCTION__) 
-		 << "(): invalid _in_face_ptr!\n";
+       std::cout << std::string(__FUNCTION__) << "(): invalid _in_face_ptr!\n";
        return 1;
     }
     if( !_out_faces_ptr ){
-       std::cout << std::string(__FUNCTION__) 
-		 << "(): invalid _out_faces_ptr!\n";
+       std::cout << std::string(__FUNCTION__) << "(): invalid _out_faces_ptr!\n";
        return 1;
     }
 
@@ -309,9 +258,9 @@ namespace kia {
     this->recursion++;
     if( 1000 < this->recursion ){ /** @todo recursion safety: un-Hardwire this. Some faces might be very big */
       std::cout << std::string(__FUNCTION__) 
-		<< "(): this->recursion = " 
-		<< this->recursion 
-		<< ", this is too much recursion for one face!\n";
+        << "(): this->recursion = " 
+        << this->recursion 
+        << ", this is too much recursion for one face!\n";
       return 1;
     }
 
@@ -439,7 +388,7 @@ namespace kia {
     //
     if( *_idx_ptr+_N > f_size ){
       std::cout << std::string( __FUNCTION__ ) 
-		<< ": file length of " << f_size << " shorter than input read length: " << *_idx_ptr+_N << std::endl;
+        << ": file length of " << f_size << " shorter than input read length: " << *_idx_ptr+_N << std::endl;
       return 1;
     }
 
@@ -512,9 +461,9 @@ namespace kia {
     // check file path for existance.
     if( !stl_file_stream.is_open() ){
       std::cout << std::string(__FUNCTION__)
-		<< ": unable to open file '"
-		<< _in_stl
-		<< "'!\n";
+    << ": unable to open file '"
+    << _in_stl
+    << "'!\n";
       return 1;
     }
 
@@ -611,7 +560,7 @@ namespace kia {
     // check
     if( !out_file.is_open() ){
       std::cout << std::string(__FUNCTION__) << "(): unable to open file '" 
-		<< _fname << "'\n";
+    << _fname << "'\n";
       return 1;
     }
     
@@ -653,4 +602,4 @@ namespace kia {
   }
   // -------------------------------------------------------------------------  
     
-} // end of namespace of "kia"
+} // end of namespace of "stlsub"
