@@ -97,7 +97,7 @@ int main( int argc, char** argv ){
   }
      
   if( verb ) OUT << "creating mesh...\n";
-  kia::Mesh* in_stl_mesh = new kia::Mesh();
+  stlsub::Mesh* in_stl_mesh = new stlsub::Mesh();
   if( !in_stl_mesh ){
     OUT << "Unable to create mesh!\n";
     return 1;

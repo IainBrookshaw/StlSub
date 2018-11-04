@@ -76,8 +76,10 @@ TEST_LDFLAGS := -L/usr/local/lib -L/usr/lib
 # 
 $(TARGET): $(OBJECTS)
 	$(CXX) $(CPPFLAGS) $(LDFLAGS) $(OBJECTS) -o $(TARGET)  $(LIBS) 
+	# rm -r $(BUILDDIR)
 
 $(BUILDDIR)/%.o: $(SOURCEDIR)/%.cpp
+	@mkdir -p $(BUILDDIR)
 	$(CXX) $(CPPFLAGS) $(LDFLAGS) -c $< -o $@
 # ------------------------------------------------------------------------------
 

@@ -26,7 +26,7 @@
 #include<vector3d.hpp>
 
 
-namespace kia {
+namespace stlsub {
 
   // ==========================================================================
   // |                          TRIANGLE CLASS                                |
@@ -80,5 +80,5 @@ namespace kia {
   std::ostream& operator<< (std::ostream &_out, Triangle const& _data);
 
        
-}// end of namespace "kia"
+}// end of namespace "stlsub"
 #endif

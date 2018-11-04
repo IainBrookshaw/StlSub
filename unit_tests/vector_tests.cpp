@@ -12,7 +12,7 @@
  ******************************************************************************/
 #include "all_tests.hpp"
 
-using namespace kia;
+using namespace stlsub;
 
 
 

@@ -28,7 +28,7 @@
 
 
 
-namespace kia {
+namespace stlsub {
 
   // ==========================================================================
   // |                            STL MESH CLASS                              |
@@ -121,5 +121,5 @@ namespace kia {
     
   }; // end of class "Mesh"
 
-} // end of kia namespace
+} // end of stlsub namespace
 #endif

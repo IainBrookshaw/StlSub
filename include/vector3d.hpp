@@ -14,7 +14,7 @@
 #define __VECTOR3D_HPP__
 #include <math.h>
 
-namespace kia {
+namespace stlsub {
   
   // ==========================================================================
   // |                          3D VECTOR CLASS                               |
@@ -55,6 +55,6 @@ namespace kia {
   // but it is convenient to declare them here.
   Vector3d crossProduct( Vector3d _v1, Vector3d _v2 );
   double vector3dAbsolute( Vector3d _v );
-}// end of namespace "kia"
+}// end of namespace "stlsub"
 
 #endif
